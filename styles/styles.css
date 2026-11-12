@@ -79,9 +79,18 @@ body.appear {
   display: block;
 }
 
+/* reserve the header's in-flow height before the nav fragment loads (CLS):
+   toaster 28.5 + banner 164.266 - 36 overlap = 156.766 on desktop; mobile wraps, so a floor */
 header {
   position: relative;
   z-index: 50;
+  min-height: 100px;
+}
+
+@media (width >= 900px) {
+  header {
+    min-height: 156.766px;
+  }
 }
 
 header .header,
