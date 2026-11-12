@@ -15,6 +15,8 @@ def clean(html):
     html = re.sub(r'\s(class|id|style|data-[\w-]+)="[^"]*"', '', html)
     html = re.sub(r'</?div[^>]*>', '', html)
     html = re.sub(r'<hr[^>]*>', '', html)
+    # the pipeline turns "&nbsp;<strong>" into NBSP + space (two spaces wide); a plain space keeps the width
+    html = re.sub(r'(&nbsp;|\u00a0)(?=<)|(?<=>)(&nbsp;|\u00a0)', ' ', html)
     return re.sub(r'>\s+<', '><', html).strip()
 
 

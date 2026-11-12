@@ -20,6 +20,12 @@ Context deltas are this session only.
 | Template it.1–2 | footer (rewrite) | logo + legal links, disclaimer, copyright from `/footer` | 3→0 (the source colours text elements, not the footer; its hidden logo label stays black) | 99.58 / 99.53 | | |
 | Build total (it.1–2) | all | 2 full gate runs (shared CSS changes both times) | 32→0 | 2/11 → 11/11 | +125k (146k→271k) | +$4.70 (account-wide) |
 | Lint | header, cards | `npm run lint` fixes (line length, `inset` shorthand, selector order); full re-gate after: unchanged 11/11, `offsets.js` 10/10 | 0→0 | unchanged | | |
+| Publish | — | branch `rjrt-home-parity` pushed; `tools/da_media.js` uploaded 5 content photos to DA (`/media/home/…`, 201 each) and pointed the DA bodies at them; `publish.js --yes --ref rjrt-home-parity`: `/nav` and `/footer` blocks match; home reported "2 authored vs 0 served", a false report (it checks the wrong URL for the index page); `/index.plain.html` serves `hero`, `cards image-card` and section `blue-swoop` | n/a | n/a | | |
+| Preview gate it.1 | all | re-gate against `https://rjrt-home-parity--rjrt--adobedrago.aem.page/` | toaster-open 0→1 (`text:not#2` x +3.9px: the pipeline serves `do&nbsp;<strong>` as NBSP + space) | 6/11 PASS | | |
+| Preview gate it.2 | nav content | statements: inline `&nbsp;` next to tags authored as a plain space (same width in Arial, no wrap at either width); `/nav` republished | toaster-open 1→0 | 7/11 PASS. The 4 remaining fails (hero, swoop × 2 widths) are only unpaired images: EDS renamed the 5 content photos to `media_<hash>`, so the gate can't pair them by name (hero 2, swoop 8 per width). Pixels: hero 99.82 / 99.79, swoop 99.90 / 99.88. Reported, not hidden | | |
+| Publish total | — | push, DA upload, 2 preview gates, `offsets.js` on preview 10/10, scripted check of dropdowns/overlay/mobile menu on preview (no console errors) | | | +46k (271k→317k) | +$7.14 (account-wide, $313.50→$320.64) |
+
+**Totals:** context 146k → 317k (+171k) after plan approval. Account meter $308.80 → $320.64 (+$11.84); other sessions share that meter, so this is an upper bound. Plan estimate: ~$10 ($8–14).
 
 ## Harness notes for this site
 - **Records vs replay:** the MHTML replay reports the overlay text at 18px; the live-captured records
@@ -27,6 +33,8 @@ Context deltas are this session only.
 - **Fragments and icon tokens:** `build.py` converts `:icon:` tokens only in pages, not in fragment
   `.plain.html` files. `tools/fragments_local.py` applies the same conversion to the local nav/footer
   copies (the pipeline does it on DA content).
+- **Inline `&nbsp;`:** the pipeline serves `&nbsp;` next to an inline tag as NBSP + space. Content
+  authors a plain space there (`tools/gen_content.py`).
 - **Port:** another session's `aem up` held port 3000, so this repo's local server ran on 3017
   (`site.json` / `gate/home.json`).
 - **Image keys:** the gate pairs images by file name. Local media uses the source's rendered
