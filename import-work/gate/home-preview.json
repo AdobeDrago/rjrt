@@ -1,0 +1,56 @@
+{
+ "site": "../site.json",
+ "page": "home",
+ "source": "https://rjrt.com/",
+ "rebuild": "https://rjrt-home-parity--rjrt--adobedrago.aem.page/",
+ "widths": [
+  1440,
+  1280
+ ],
+ "out": "work/gate/home-preview",
+ "bundle": "../work/bundles/home",
+ "timelines": [],
+ "sections": [
+  {
+   "name": "toaster",
+   "source": ".toaster__wrap",
+   "rebuild": ".header .header-toaster"
+  },
+  {
+   "name": "header",
+   "source": ".banner__wrap",
+   "rebuild": ".header .header-banner"
+  },
+  {
+   "name": "hero",
+   "source": "@sec:1",
+   "rebuild": "main > .section:nth-child(1)"
+  },
+  {
+   "name": "swoop",
+   "source": "@sec:2",
+   "rebuild": "main > .section:nth-child(2)"
+  },
+  {
+   "name": "footer",
+   "source": "footer",
+   "rebuild": "footer .footer"
+  },
+  {
+   "name": "toaster-open",
+   "widths": [
+    1440
+   ],
+   "source": "@visible:.toaster__full",
+   "rebuild": "@visible:.header-toaster-full",
+   "open": {
+    "source": [
+     ".trigger-toaster#0"
+    ],
+    "rebuild": [
+     ".header-toaster:not(.is-open) .header-toaster-trigger#0"
+    ]
+   }
+  }
+ ]
+}
