@@ -11,3 +11,9 @@ helix-importer-ui
 # Ensure these files are tracked
 !CLAUDE.md
 !AGENTS.md
+
+# parity rebuild: local preview output and local copies of DA media
+/index.html
+/nav.plain.html
+/footer.plain.html
+/media/

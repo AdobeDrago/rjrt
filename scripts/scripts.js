@@ -143,6 +143,26 @@ function decorateButtons(main) {
 }
 
 /**
+ * Section style "blue-swoop": background photo plus the white curve drawn over it.
+ * @param {Element} main The main element
+ */
+const SWOOP = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1279.1 672.6" height="672.6" width="1279.1" fill="transparent" aria-hidden="true" focusable="false"><path stroke="rgb(255 255 255)" fill="none" d="M1158.6,48.9 c-52.5-29.5-110.3-48-168.8-61.2c-102-23.2-207-30.6-311.4-29.2c-53.1,0.7-106,3.6-158.9,8.6c-51,4.8-102,11.2-152.4,20 C317-4.2,267.1,5.5,217.7,17.5c-5.4,1.3-10.7,2.6-16,4c-0.7,0.2-1.2,0.9-1,1.6c0.2,0.6,0.8,1.1,1.4,1 c478.9-45.3,869.6,77.2,910.3,302c21.2,117-56.2,241.4-200.8,351.4c-0.6,0.4-0.7,1.3-0.3,1.9c0.4,0.6,1.2,0.7,1.8,0.3 c115.3-75.3,237.4-159.8,320.1-271.9c29.6-40.2,54.6-88.3,59-138.8C1300.4,174.7,1237.5,93.2,1158.6,48.9"/></svg>';
+function decorateSectionBackgrounds(main) {
+  main.querySelectorAll(':scope > .section.blue-swoop').forEach((section) => {
+    const bg = document.createElement('div');
+    bg.className = 'section-bg';
+    const img = document.createElement('img');
+    img.src = `${window.hlx.codeBasePath}/images/blue-swoop-bg.jpg`;
+    img.alt = '';
+    img.width = 1298;
+    img.height = 682;
+    bg.append(img);
+    bg.insertAdjacentHTML('beforeend', SWOOP);
+    section.prepend(bg);
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -151,6 +171,7 @@ export function decorateMain(main) {
   decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);
+  decorateSectionBackgrounds(main);
   decorateBlocks(main);
   decorateButtons(main);
 }
